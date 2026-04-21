@@ -187,10 +187,9 @@ public:
         return RefMut(this);
     }
 
-    ~RefCell() {
+    ~RefCell() noexcept(false) {
         if (borrow_count_ != 0 || mut_borrowed_) {
             throw DestructionError("RefCell destroyed while borrowed");
         }
     }
 };
-
